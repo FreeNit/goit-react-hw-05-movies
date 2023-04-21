@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import fetchPopularMovies from 'services/fetchMovies';
 
 const Home = () => {
-  const [movies, setMovies] = useState();
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const getPopularMovies = async () => {
@@ -20,6 +20,7 @@ const Home = () => {
   return (
     <div>
       <p>Trending today</p>
+
       <ul>
         {movies.map(movie => (
           <li key={movie.id}>
