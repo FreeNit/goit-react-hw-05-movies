@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import fetchPopularMovies from 'services/fetchMovies';
 import MoviesList from 'components/MoviesList';

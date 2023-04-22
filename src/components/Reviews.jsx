@@ -18,7 +18,7 @@ const Reviews = () => {
     };
 
     getReview();
-  }, []);
+  }, [movieId]);
 
   return reviews && <ReviewsSection reviews={reviews} />;
 };

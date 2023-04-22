@@ -19,7 +19,7 @@ const Cast = () => {
     };
 
     getCastInfo();
-  }, []);
+  }, [movieId]);
 
   return cast && <ActorsList cast={cast} />;
 };
