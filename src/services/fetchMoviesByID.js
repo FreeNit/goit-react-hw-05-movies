@@ -2,9 +2,9 @@ import axios from 'axios';
 
 import { API_KEY, BASIC_URL } from './constants';
 
-async function fetchPopularMovies() {
+async function fetchMovieDetails(movieID) {
   try {
-    const uri = `${BASIC_URL}/trending/movie/day?api_key=${API_KEY}`;
+    const uri = `${BASIC_URL}/movie/${movieID}?api_key=${API_KEY}`;
     const response = await axios.get(uri);
     return response;
   } catch (error) {
@@ -12,4 +12,4 @@ async function fetchPopularMovies() {
   }
 }
 
-export default fetchPopularMovies;
+export default fetchMovieDetails;

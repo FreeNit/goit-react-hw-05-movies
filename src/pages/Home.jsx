@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import fetchPopularMovies from 'services/fetchMovies';
+import MoviesList from 'components/MoviesList';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
 
+  // -> get popular movies
   useEffect(() => {
     const getPopularMovies = async () => {
       const {
@@ -17,19 +20,7 @@ const Home = () => {
     getPopularMovies();
   }, []);
 
-  return (
-    <div>
-      <p>Trending today</p>
-
-      <ul>
-        {movies.map(movie => (
-          <li key={movie.id}>
-            <NavLink>{movie.title}</NavLink>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <MoviesList movies={movies} />;
 };
 
 export default Home;
