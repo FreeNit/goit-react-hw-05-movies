@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 import fetchByQuery from 'services/fetchByQuery';
 
@@ -7,12 +7,12 @@ const Movies = () => {
   const [inputQuery, setInputQuery] = useState('');
   const [movieCollection, setMovieCollection] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
 
   const queryValue = searchParams.get('query') ?? '';
 
   useEffect(() => {
     if (queryValue) {
-      console.log('NEW REQUEST');
       const getMovieCollectionByQuery = async () => {
         const {
           data: { results },
@@ -45,7 +45,9 @@ const Movies = () => {
         <div>
           {movieCollection.map(movie => (
             <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
+              <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+                {movie.original_title}
+              </Link>
             </li>
           ))}
         </div>

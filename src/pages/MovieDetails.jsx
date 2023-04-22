@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import fetchMovieDetails from 'services/fetchMoviesByID';
 import Movie from 'components/Movie';
@@ -8,6 +8,10 @@ import { BASIC_POSTER_URL } from 'services/constants';
 
 const MovieDetails = () => {
   const [movieDetail, setMovieDetails] = useState(null);
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/movies';
+
+  console.log(location.state);
 
   const { movieId } = useParams();
 
@@ -27,9 +31,18 @@ const MovieDetails = () => {
     };
 
     getMovieDetails();
-  }, []);
+  }, [movieId]);
 
-  return movieDetail && <Movie movieDetail={movieDetail} />;
+  return (
+    movieDetail && (
+      <>
+        <Link to={backLinkHref}>
+          <FiArrowLeft /> Go Back
+        </Link>
+        <Movie movieDetail={movieDetail} />
+      </>
+    )
+  );
 };
 
 export default MovieDetails;

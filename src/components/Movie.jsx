@@ -24,8 +24,6 @@ const Movie = ({
 
   return (
     <>
-      <button type="button">Change to LINK !!!!</button>
-
       <MovieSection>
         <div>
           <StyledPoster src={`${posterPath}`} />
