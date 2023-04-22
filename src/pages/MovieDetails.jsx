@@ -24,14 +24,12 @@ const MovieDetails = () => {
       };
 
       setMovieDetails(tempMovieDetails);
-
-      console.log(tempMovieDetails);
     };
 
     getMovieDetails();
   }, []);
 
-  return <Movie movieDetail={movieDetail} />;
+  return movieDetail && <Movie movieDetail={movieDetail} />;
 };
 
 export default MovieDetails;
