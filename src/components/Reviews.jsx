@@ -1,5 +1,26 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import fetchMovieReviews from 'services/fetchReviews';
+import ReviewsSection from './ReviewsSection';
+
 const Reviews = () => {
-  return <div>Reviews Info</div>;
+  const [reviews, setReviews] = useState(null);
+  const { movieId } = useParams();
+
+  useEffect(() => {
+    const getReview = async () => {
+      const {
+        data: { results },
+      } = await fetchMovieReviews(movieId);
+
+      setReviews(results);
+    };
+
+    getReview();
+  }, []);
+
+  return reviews && <ReviewsSection reviews={reviews} />;
 };
 
 export default Reviews;

@@ -3,9 +3,10 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import fetchMoviesCredits from 'services/fetchMoviesCredits';
+import ActorsList from './ActorsList';
 
 const Cast = () => {
-  const [casts, setCast] = useState();
+  const [cast, setCast] = useState(null);
 
   const { movieId } = useParams();
 
@@ -14,13 +15,13 @@ const Cast = () => {
       const {
         data: { cast },
       } = await fetchMoviesCredits(movieId);
-      console.log(cast);
+      setCast(cast);
     };
 
     getCastInfo();
   }, []);
 
-  return <div>CAST Info</div>;
+  return cast && <ActorsList cast={cast} />;
 };
 
 export default Cast;
