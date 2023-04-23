@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -49,7 +50,10 @@ const Movie = ({
           </li>
         </ul>
       </ExtraInfo>
-      <Outlet />
+
+      <Suspense fallback={<div>Loading subpage...</div>}>
+        <Outlet />{' '}
+      </Suspense>
     </>
   );
 };

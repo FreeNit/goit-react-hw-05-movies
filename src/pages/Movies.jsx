@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import fetchByQuery from 'services/fetchByQuery';
+import MoviesSearchCollection from 'components/MoviesSearchCollection';
 
 const Movies = () => {
   const [inputQuery, setInputQuery] = useState('');
   const [movieCollection, setMovieCollection] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  const location = useLocation();
 
   const queryValue = searchParams.get('query') ?? '';
 
@@ -41,16 +41,9 @@ const Movies = () => {
         <input type="text" value={inputQuery} onChange={handleChange} />
         <button type="submit">Search</button>
       </form>
+
       {movieCollection && (
-        <div>
-          {movieCollection.map(movie => (
-            <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-                {movie.original_title}
-              </Link>
-            </li>
-          ))}
-        </div>
+        <MoviesSearchCollection movieCollection={movieCollection} />
       )}
     </>
   );
